@@ -1,0 +1,1 @@
+https://legacy.gitbook.com/book/victoriest/golang-tcp-server/details
