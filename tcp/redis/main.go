@@ -51,12 +51,21 @@ func handlerReq(conn net.Conn)  {
 		// fmt.Println("msg: ",string(msg))
 		// conn.Write([]byte("+OK\r\n"))
 
-		msg, err := reader.ReadString('\n')
-		if err != nil {
+		// msg, err := reader.ReadString('\n')
+		// if err != nil {
+		// 	fmt.Println(err)
+		// }
+
+		// fmt.Println(msg)
+		// conn.Write([]byte("+OK\r\n"))
+		buf := make([]byte, 4096)
+		msg, err := reader.Read(buf)
+		if err != nil{
 			fmt.Println(err)
 		}
-
-		fmt.Println(msg)
+		fmt.Println("err: ", err)
+		fmt.Println("msg: ",msg)
+		fmt.Println("buf:", string(buf))
 		conn.Write([]byte("+OK\r\n"))
 	}
 
