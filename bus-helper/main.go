@@ -79,6 +79,12 @@ func getBusInfo(busNo string, data url.Values, ch chan string) {
 		ch <- busNo + " 待发车"
 	}
 
+	if len(res) != 1 {
+		ch <- busNo + " 待发车"
+	}
+
+	fmt.Println(res)
+
 	sec, err := strconv.ParseFloat(res[0].Time, 32)
 	if err != nil {
 		ch <- busNo + " 待发车"
