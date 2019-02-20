@@ -16,4 +16,9 @@ func main()  {
 	if _, ok := test["b"]; !ok {
 		fmt.Println(ok)
 	}
+
+	var m = map[string]string{}
+	m["foo"] = "bar"
+	fmt.Println("%v", m)
+
 }
