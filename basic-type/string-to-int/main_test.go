@@ -14,3 +14,8 @@ func BenchmarkStringToIntWithSscanf(t *testing.B)  {
 		StringToIntWithSscanf("219")
 	}
 }
+func BenchmarkStringToIntWithParseInt(t *testing.B)  {
+	for n := 0; n < t.N; n++ {
+		StringToIntWithParseInt("219")
+	}
+}

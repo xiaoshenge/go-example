@@ -8,6 +8,9 @@ import (
 func StringToIntWithAtoi(s string) (int, error) {
 	return strconv.Atoi(s)
 }
+func StringToIntWithParseInt(s string)(int64, error)  {
+	return strconv.ParseInt(s, 10, 32)
+}
 
 func StringToIntWithSscanf(s string) (int, error)  {
 	var i int
@@ -26,4 +29,11 @@ func main()  {
 		fmt.Println(err)
 	}
 	fmt.Printf("%d\n", s)
+
+	var i int64
+	i, err = StringToIntWithParseInt("219")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("%d\n", int(i))
 }
