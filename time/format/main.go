@@ -14,4 +14,13 @@ func main()  {
 	
 	// Timestamp
 	fmt.Println(time.Now().Unix()) // Ex: 1257894000
+
+	timeLocation, _ := time.LoadLocation("Local")
+	t := time.Date(2019, 2, 22, 12,0,0,0, timeLocation)
+	fmt.Println(t)
+
+	year,month,day := time.Now().Date()
+	fmt.Println(year)
+	fmt.Printf("%d\n",month)
+	fmt.Println(day)
 }
