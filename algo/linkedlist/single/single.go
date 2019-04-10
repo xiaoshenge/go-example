@@ -75,7 +75,7 @@ func (list *LinkedList)InsertToHead(v interface{}) bool {
 }
 func (list *LinkedList)InsertToTail(v interface{}) bool {
 	cur := list.head
-	if cur != nil {
+	for cur.next != nil {
 		cur = cur.next
 	}
 	return list.InsertAfter(cur, v)
