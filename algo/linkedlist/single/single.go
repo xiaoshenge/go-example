@@ -125,3 +125,19 @@ func (list *LinkedList)Print(){
 	}
 	fmt.Println(format)
 }
+
+func (list *LinkedList)Revert() {
+	if list.head == nil || list.head.next == nil || list.head.next.next == nil {
+		return 
+	}
+	
+	var pre *ListNode
+	cur := list.head.next
+	for cur != nil {
+		tmp := cur.next
+		cur.next = pre
+		pre = cur
+		cur = tmp
+	}
+	list.head.next = pre
+}
