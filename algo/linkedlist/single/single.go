@@ -141,3 +141,69 @@ func (list *LinkedList)Revert() {
 	}
 	list.head.next = pre
 }
+
+func MergeSorted(l1,l2 *LinkedList) *LinkedList {
+	if l1 == nil || l1.head == nil || l1.head.next == nil {
+		return l2
+	}
+	if l2 == nil || l2.head == nil || l2.head.next == nil {
+		return l1
+	}
+
+	l := &LinkedList{head:&ListNode{}}
+	cur := l.head
+	cur1 := l1.head.next
+	cur2 := l2.head.next
+	if cur1 != nil && cur2 != nil{
+		if cur1.Value().(int) > cur2.Value().(int){
+			cur.next = cur2
+			cur2 = cur2.next
+		} else {
+			cur.next = cur1
+			cur1 = cur1.next
+		}
+		cur = cur.next
+	}
+	if cur1 != nil {
+		cur.next = cur1
+	} else if cur2 != nil{
+		cur.next = cur2
+	}
+	return l
+}
+
+func (list *LinkedList)DeleteBottomN(n int)  {
+	if n < 0 || list.head == nil || list.head.next == nil {
+		return
+	}
+	fast := list.head
+	for i := 0; i <= n; i++ {
+		fast = fast.next
+	}
+
+	if fast == nil{
+		return
+	}
+
+	slow := list.head
+	for fast.next != nil {
+		slow = slow.next
+		fast = fast.next
+	}
+	slow.next = slow.next.next
+}
+
+func (list *LinkedList) FindMiddleNode() *ListNode {
+	if list.head == nil || list.head.next == nil {
+		return nil
+	}
+	if list.head.next.next == nil {
+		return list.head.next
+	}
+	slow, fast := list.head, list.head
+	for fast != nil && fast.next != nil {
+		slow = slow.next
+		fast = fast.next.next
+	}
+	return slow
+}
