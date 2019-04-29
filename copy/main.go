@@ -23,4 +23,9 @@ func main()  {
 	fmt.Println("cap arr1:",cap(arr1))
 	fmt.Println(arr1)
 
+	arr1 = arr1[:len(arr1)-1]
+	fmt.Println("len arr1:",len(arr1))
+	fmt.Println("cap arr1:",cap(arr1))
+	fmt.Println(arr1)
+
 }
