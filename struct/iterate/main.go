@@ -6,7 +6,6 @@ import (
 	"github.com/fatih/structs"
 )
 
-
 func main() {
 	x := struct {
 		Foo string `structs:"foo" json:"foo"`
@@ -22,5 +21,6 @@ func main() {
 	// }
 
 	// fmt.Println(values)
-	fmt.Println(structs.Map(x))
+	m := structs.Map(x)
+	fmt.Printf("%#v", m)
 }

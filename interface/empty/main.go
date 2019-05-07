@@ -16,4 +16,11 @@ func main()  {
 	a = s
 	s = a.(string)
 	fmt.Printf("%#v\n", s)
+
+	params := map[string]interface{}{
+		"a": "aaa",
+		"b": "97",
+	}
+	fmt.Println(params["a"].(string))
+	fmt.Println(params["b"].(string))
 }
