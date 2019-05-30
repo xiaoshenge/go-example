@@ -2,25 +2,37 @@ package main
 
 import (
 	"fmt"
-	// "errors"
+	"io/ioutil"
+	"os"
+	"path/filepath"
+
 	"github.com/pkg/errors"
 )
 
-var (
-)
-
-func main()  {
-	err := process()
-	fmt.Println(err)
-}
-
-func process() error {
-	if err := doSomething(); err != nil{
-		return errors.Wrap(err, "processing ")
+func ReadFile(path string) ([]byte, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, errors.Wrap(err, "open failed")
 	}
-	return nil
+	defer f.Close()
+
+	buf, err := ioutil.ReadAll(f)
+	if err != nil {
+		return nil, errors.Wrap(err, "read failed")
+	}
+	return buf, nil
 }
 
-func doSomething() error {
-	return errors.New("something bad happen")
+func ReadConf() ([]byte, error) {
+	home := os.Getenv("HOME")
+	config, err := ReadFile(filepath.Join(home, ".settting.xml"))
+	return config, errors.WithMessage(err, "could not read config")
+}
+func main() {
+	_, err := ReadConf()
+	if err != nil {
+		fmt.Printf("original error:%T\n%v\n", errors.Cause(err), errors.Cause(err))
+		fmt.Printf("stack trace:\n%+v\n", err)
+		os.Exit(1)
+	}
 }
