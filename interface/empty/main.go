@@ -16,14 +16,18 @@ type DemoMath struct {
 	Math
 }
 
-func DemoAdd() mathAdd {
-	return mathAdd(func(a int, b int) int {
-		return a + b + 1
-	})
+// func DemoAdd() mathAdd {
+// 	return mathAdd(func(a int, b int) int {
+
+// 	})
+// }
+
+func DemoAdd(a int, b int) int {
+	return a + b + 1
 }
 
 func main() {
-	m := DemoMath{DemoAdd()}
+	m := DemoMath{mathAdd(DemoAdd)}
 	a := m.Add(1, 2)
 	fmt.Println(a)
 }
