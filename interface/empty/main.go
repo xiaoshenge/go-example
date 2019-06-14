@@ -1,26 +1,29 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func main()  {
-	var a interface{}
-	var i  = 5
-	s := "hello world"
+type Math interface {
+	Add(a int, b int) int
+}
 
-	a = i
-	i = a.(int)
-	fmt.Printf("%#v\n",i)
+type mathAdd func(a int, b int) int
 
-	a = s
-	s = a.(string)
-	fmt.Printf("%#v\n", s)
+func (m mathAdd) Add(a int, b int) int {
+	return m(a, b)
+}
 
-	params := map[string]interface{}{
-		"a": "aaa",
-		"b": "97",
-	}
-	fmt.Println(params["a"].(string))
-	fmt.Println(params["b"].(string))
+type DemoMath struct {
+	Math
+}
+
+func DemoAdd() mathAdd {
+	return mathAdd(func(a int, b int) int {
+		return a + b + 1
+	})
+}
+
+func main() {
+	m := DemoMath{DemoAdd()}
+	a := m.Add(1, 2)
+	fmt.Println(a)
 }
