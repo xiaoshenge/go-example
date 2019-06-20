@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"context"
+	"fmt"
 )
 
-type User struct{
-	Name string
+type User struct {
+	Name       string
 	IsLoggedIn bool
 }
 
@@ -27,16 +27,22 @@ func getUserFromContext(ctx context.Context) *User {
 	return user
 }
 
-func printUser(ctx context.Context)  {
+func printUser(ctx context.Context) {
 	user := getUserFromContext(ctx)
 	fmt.Printf("%#v\n", user)
 }
 
-func main()  {
+func main() {
 	user := &User{
-		Name: "john",
+		Name:       "john",
 		IsLoggedIn: false,
 	}
 	ctx := contextWithUser(context.Background(), user)
 	printUser(ctx)
+
+	ctxa := context.WithValue(context.Background(), "a", "a")
+	ctxb := context.WithValue(ctxa, "b", "b")
+	val := ctxb.Value("a")
+	fmt.Println(val)
+
 }
