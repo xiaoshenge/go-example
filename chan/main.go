@@ -13,6 +13,16 @@ func main() {
 	table <- new(Ball)
 	time.Sleep(1 * time.Second)
 	<-table
+
+	ch := make(chan struct{}, 2)
+	ch <- struct{}{}
+	ch <- struct{}{}
+	close(ch)
+	for i := 0; i < 5; i++ {
+		ret, ok := <-ch
+		fmt.Println(ret)
+		fmt.Println(ok)
+	}
 }
 
 type Ball struct {
