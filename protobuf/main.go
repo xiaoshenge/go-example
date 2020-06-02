@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/gogo/protobuf/proto"
+	gogoproto "github.com/gogo/protobuf/proto"
+	"github.com/golang/protobuf/proto"
 	"github.com/xiaoshenge/go-example/protobuf/demo"
 )
 
@@ -17,7 +18,7 @@ func main() {
 		fmt.Println(err)
 	}
 	newTest := &demo.Test{}
-	err = proto.Unmarshal(data, newTest)
+	err = gogoproto.Unmarshal(data, newTest)
 	if err != nil {
 		fmt.Println(err)
 	}
