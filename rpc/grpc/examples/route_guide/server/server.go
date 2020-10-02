@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a slice_copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -136,8 +136,8 @@ func (s *routeGuideServer) RouteChat(stream pb.RouteGuide_RouteChatServer) error
 
 		s.mu.Lock()
 		s.routeNotes[key] = append(s.routeNotes[key], in)
-		// Note: this copy prevents blocking other clients while serving this one.
-		// We don't need to do a deep copy, because elements in the slice are
+		// Note: this slice_copy prevents blocking other clients while serving this one.
+		// We don't need to do a deep slice_copy, because elements in the slice are
 		// insert-only and never modified.
 		rn := make([]*pb.RouteNote, len(s.routeNotes[key]))
 		copy(rn, s.routeNotes[key])
@@ -243,7 +243,7 @@ func main() {
 	grpcServer.Serve(lis)
 }
 
-// exampleData is a copy of testdata/route_guide_db.json. It's to avoid
+// exampleData is a slice_copy of testdata/route_guide_db.json. It's to avoid
 // specifying file path with `go run`.
 var exampleData = []byte(`[{
     "location": {
